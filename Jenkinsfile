@@ -26,7 +26,7 @@ pipeline {
                 script {
                     def scannerHome = tool 'sonarscanner';
                     withSonarQubeEnv('sonarqube-webgoat') { // If you have configured more than one global server connection, you can specify its name
-                        sh "${scannerHome}/bin/sonar-scanner \
+                        sh '''${scannerHome}/bin/sonar-scanner \
 //                        sh "mvn sonar:sonar \
                         -Dsonar.projectKey=webgoat\
                         -Dsonar.language=java\
@@ -34,7 +34,7 @@ pipeline {
                         -Dsonar.exclusions=**/*.ts\
 //                        -Dsonar.sources=. \
                         -Dsonar.host.url=${SONAR_HOST_URL}\
-                        -Dsonar.login=${SONAR_AUTH_TOKEN}"
+                        -Dsonar.login=${SONAR_AUTH_TOKEN}'''
                     }
                 }
             }
