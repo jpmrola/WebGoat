@@ -44,13 +44,13 @@ pipeline {
                 PATH        = "/busybox:$PATH"
                 REGISTRY    = 'index.docker.io'
                 REPOSITORY  = 'jrolaubi'
-                IMAGE       = 'webgoat'
+                IMAGE       = 'webgoat-tese'
             }
             steps {
                 script {
                     container(name: 'kaniko', shell: '/busybox/sh') {
                     sh '''#!/busybox/sh
-                    /kaniko/executor -f `pwd`/docker/Dockerfile -c `pwd` --cache=true --destination=${REGISTRY}/${REPOSITORY}/${IMAGE}
+                    /kaniko/executor -f `pwd`/docker/Dockerfile -c `pwd`/docker --cache=true --destination=${REGISTRY}/${REPOSITORY}/${IMAGE}
                     '''
                     }
                 }
