@@ -6,9 +6,9 @@ pipeline {
         kubernetes {
             label 'kubeagent-webgoat'
         }
+    }
     tools {
         maven 'Maven 3.8.5'
-    }
     }
     stages {
         stage('Clone repo') { 
