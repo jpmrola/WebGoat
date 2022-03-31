@@ -1,0 +1,16 @@
+[localhost]
+127.0.0.1 ansible_connection=local
+
+[node1]
+206.189.242.1 
+
+[node2]
+178.128.140.201 
+
+[cluster:children]
+node1
+node2
+
+[cluster:vars]
+ansible_ssh_user=root
+ansible_ssh_private_key_file=/home/jenkins/.ssh/id_rsa
