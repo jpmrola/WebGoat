@@ -8,7 +8,7 @@ pipeline {
         }
     }
     tools {
-        maven 'Maven 3.8.5'
+        maven 'maven'
     }
     stages {
         stage('Clone repo') { 
