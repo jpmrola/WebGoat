@@ -17,9 +17,9 @@ pipeline {
             steps {
                 script {
                     def scannerHome = tool 'sonarscanner';
-                    withSonarQubeEnv('sonarqube-juice-shop') { // If you have configured more than one global server connection, you can specify its name
+                    withSonarQubeEnv('sonarqube-webgoat') { // If you have configured more than one global server connection, you can specify its name
                         sh "${scannerHome}/bin/sonar-scanner \
-                        -Dsonar.projectKey=juice-shop\
+                        -Dsonar.projectKey=webgoat\
                         -Dsonar.sources=. \
                         -Dsonar.host.url=${SONAR_HOST_URL}\
                         -Dsonar.login=${SONAR_AUTH_TOKEN}"
