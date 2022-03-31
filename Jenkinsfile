@@ -18,7 +18,7 @@ pipeline {
         }
         stage('Build project') { 
             steps {
-                sh 'mvn clean install -DskipTests'
+                sh '${WORKSPACE}/mvnw clean install -DskipTests'
             }
         }
         stage('SonarQube analysis') {
