@@ -9,6 +9,7 @@ pipeline {
     }
     tools {
         maven 'maven'
+        jdk 'openjdk17'
     }
     stages {
         stage('Clone repo') { 
@@ -18,7 +19,7 @@ pipeline {
         }
         stage('Build project') { 
             steps {
-                sh '${WORKSPACE}/mvnw clean install -DskipTests'
+                sh 'mvn --version; ${WORKSPACE}/mvn clean install -DskipTests'
             }
         }
         stage('SonarQube analysis') {
@@ -30,9 +31,7 @@ pipeline {
 //                        sh "mvn sonar:sonar \
                         -Dsonar.projectKey=webgoat\
                         -Dsonar.language=java\
-                        -Dsonar.java.binaries=**/target/classes\
-                        -Dsonar.exclusions=**/*.ts\
-//                        -Dsonar.sources=. \
+                        -Dsonar.sources=webgoat-container/ \
                         -Dsonar.host.url=${SONAR_HOST_URL}\
                         -Dsonar.login=${SONAR_AUTH_TOKEN}'''
                     }
