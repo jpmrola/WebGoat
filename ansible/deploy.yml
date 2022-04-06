@@ -5,6 +5,9 @@
   - name: Remove previous deployments
     ansible.builtin.shell: microk8s kubectl delete deployments webgoat -n webgoat && microk8s kubectl delete services webgoat -n webgoat
     ignore_errors: yes
+  - name: Pause to complete pod deletion
+    pause:
+      seconds: 30
   - name: Create a Deployment for webgoat
     kubernetes.core.k8s:
       state: present
@@ -36,6 +39,9 @@
                 - containerPort: 9090
                 - containerPort: 80
                 - containerPort: 8888
+  - name: Pause to avoid spring startup bugs
+    pause:
+      seconds: 30
   - name: Create a Service for webgoat
     kubernetes.core.k8s:
       state: present
