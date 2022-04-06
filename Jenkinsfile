@@ -50,7 +50,7 @@ pipeline {
                 script {
                     container(name: 'kaniko', shell: '/busybox/sh') {
                     sh '''#!/busybox/sh
-                    /kaniko/executor -f `pwd`/docker/Dockerfile -c `pwd`/docker --cache=true --destination=${REGISTRY}/${REPOSITORY}/${IMAGE}
+                    /kaniko/executor -f `pwd`/docker/Dockerfile -c `pwd`/docker --build-arg webgoat_version=8.2.0-SNAPSHOT --cache=true --destination=${REGISTRY}/${REPOSITORY}/${IMAGE}
                     '''
                     }
                 }
