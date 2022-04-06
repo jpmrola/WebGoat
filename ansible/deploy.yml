@@ -34,6 +34,8 @@
                 ports:
                 - containerPort: 8080
                 - containerPort: 9090
+                - containerPort: 80
+                - containerPort: 8888
   - name: Create a Service for webgoat
     kubernetes.core.k8s:
       state: present
@@ -55,3 +57,9 @@
               protocol: TCP
               port: 9090
               targetPort: 9090
+            - name: webgoat-8888
+              protocol: TCP
+              port: 80
+              targetPort: 8888
+          type: LoadBalancer
+          LoadBalancerIP: 10.110.0.5
