@@ -59,13 +59,16 @@
               protocol: TCP
               port: 8080
               targetPort: 8080
+              nodePort: 30680
             - name: webwolf
               protocol: TCP
               port: 9090
               targetPort: 9090
+              nodePort: 30690
             - name: webgoat-8888
               protocol: TCP
               port: 80
               targetPort: 8888
+              nodePort: 30688
           type: LoadBalancer
           loadBalancerIP: 10.110.0.5
