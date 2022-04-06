@@ -25,7 +25,7 @@
                 app: webgoat
             spec:
               containers:
-              - image: "jrolaubi/webgoat"
+              - image: "jrolaubi/webgoat-tese"
                 imagePullPolicy: IfNotPresent
                 name: webgoat
                 ports:
