@@ -28,6 +28,9 @@
               - image: "jrolaubi/webgoat-tese"
                 imagePullPolicy: IfNotPresent
                 name: webgoat
+                env:
+                - name: TZ
+                  value: Europe/London
                 ports:
                 - containerPort: 8080
                 - containerPort: 9090
