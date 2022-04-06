@@ -3,7 +3,7 @@
   gather_facts: false
   tasks:
   - name: Remove previous deployments
-    ansible.builtin.shell: microk8s kubectl delete deployments webgoat -n webgoat
+    ansible.builtin.shell: microk8s kubectl delete deployments webgoat -n webgoat && microk8s kubectl delete services webgoat -n webgoat
     ignore_errors: yes
   - name: Create a Deployment for webgoat
     kubernetes.core.k8s:
@@ -31,3 +31,23 @@
                 ports:
                 - containerPort: 8080
                 - containerPort: 9090
+  - name: Create a Service for webgoat
+    kubernetes.core.k8s:
+      state: present
+      definition:
+        apiVersion: v1
+        kind: Service
+        metadata:
+          name: webgoat
+        spec:
+          selector:
+            app: webgoat
+          ports:
+            - name: webgoat
+              protocol: TCP
+              port: 8080
+              targetPort: 8080
+            - name: webwolf
+              protocol: TCP
+              port: 9090
+              targetPort: 9090
