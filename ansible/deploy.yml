@@ -68,4 +68,4 @@
               port: 80
               targetPort: 8888
           type: LoadBalancer
-          LoadBalancerIP: 10.110.0.5
+          loadBalancerIP: 10.110.0.5
