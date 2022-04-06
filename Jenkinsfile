@@ -58,11 +58,13 @@ pipeline {
         }
         stage('Snyk analysis') {
             steps {
-                snykSecurity(
-                snykInstallation: 'snyk',
-                snykTokenId: 'snyk',
-                additionalArguments: '--debug'
-                )
+                catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                    snykSecurity(
+                    snykInstallation: 'snyk',
+                    snykTokenId: 'snyk',
+                    additionalArguments: '--debug'
+                    )
+                }
             }
         }
         stage('Ansible playbook') {
