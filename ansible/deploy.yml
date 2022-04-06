@@ -31,11 +31,11 @@
                 env:
                 - name: TZ
                   value: Europe/London
-                ports:
-                - containerPort: 8080
-                - containerPort: 9090
-                - containerPort: 80
-                - containerPort: 8888
+                  #                ports:
+                  #                - containerPort: 8080
+                  #                - containerPort: 9090
+                  #                - containerPort: 80
+                  #                - containerPort: 8888
   - name: Create a Service for webgoat
     kubernetes.core.k8s:
       state: present
