@@ -79,7 +79,8 @@ pipeline {
                 script {
                     container(name: 'zap', shell: '/bin/sh') {
                         sh '''#!/bin/sh
-                        zap-baseline.py -r index.html -t http://10.110.0.5:30680/WebGoat -I
+                        ls -l /zap/
+                        /zap/zap-baseline.py -r index.html -t http://10.110.0.5:30680/WebGoat -I
                         '''
                     }
                 }
