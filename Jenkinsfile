@@ -85,18 +85,18 @@ pipeline {
                 }
             }
         }
-        post {
-            always {
-                // publish html
-                publishHTML target: [
-                    allowMissing: false,
-                    alwaysLinkToLastBuild: false,
-                    keepAll: true,
-                    reportDir: '/zap/wrk',
-                    reportFiles: 'index.html',
-                    reportName: 'OWASP Zed Attack Proxy'
-                ]
-            }
+    }
+    post {
+        always {
+            // publish html
+            publishHTML target: [
+                allowMissing: false,
+                alwaysLinkToLastBuild: false,
+                keepAll: true,
+                reportDir: '/zap/wrk',
+                reportFiles: 'index.html',
+                reportName: 'OWASP Zed Attack Proxy'
+            ]
         }
     }
 }
