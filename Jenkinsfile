@@ -79,9 +79,7 @@ pipeline {
                 script {
                     container(name: 'zap', shell: '/bin/sh') {
                         sh '''#!/bin/sh
-                        echo $PATH
                         export PATH=/zap:$PATH
-                        echo $PATH
                         /zap/zap-baseline.py -r index.html -t http://10.110.0.5:30680/WebGoat || return_code=$?
                         echo "exit value was  - " $return_code
                         '''
