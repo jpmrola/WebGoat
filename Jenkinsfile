@@ -74,5 +74,29 @@ pipeline {
                 inventory: '${WORKSPACE}/ansible/inventory')
             }
         }
+        stage('ZAP scan') {
+            steps {
+                script {
+                    container(name: 'zap', shell: '/bin/sh') {
+                        sh '''#!/bin/sh
+                        zap-baseline.py -r index.html -t http://10.110.0.5:30680/WebGoat -I
+                        '''
+                    }
+                }
+            }
+        }
+        post {
+            always {
+                // publish html
+                publishHTML target: [
+                    allowMissing: false,
+                    alwaysLinkToLastBuild: false,
+                    keepAll: true,
+                    reportDir: '/zap/wrk',
+                    reportFiles: 'index.html',
+                    reportName: 'OWASP Zed Attack Proxy'
+                ]
+            }
+        }
     }
 }
