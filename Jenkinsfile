@@ -80,8 +80,9 @@ pipeline {
                     container(name: 'zap', shell: '/bin/sh') {
                         sh '''#!/bin/sh
                         export PATH=/zap:$PATH
-                        /zap/zap-baseline.py -r `pwd`/index.html -t http://10.110.0.5:30680/WebGoat || return_code=$?
+                        /zap/zap-baseline.py -r index.html -t http://10.110.0.5:30680/WebGoat || return_code=$?
                         echo "exit value was  - " $return_code
+                        cp /zap/wrk/index.html ${WORKSPACE}
                         '''
                     }
                 }
@@ -95,7 +96,7 @@ pipeline {
                 allowMissing: false,
                 alwaysLinkToLastBuild: false,
                 keepAll: true,
-                reportDir: '`pwd`',
+                reportDir: './',
                 reportFiles: 'index.html',
                 reportName: 'OWASP Zed Attack Proxy'
             ]
