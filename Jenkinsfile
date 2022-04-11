@@ -80,7 +80,7 @@ pipeline {
                     container(name: 'zap', shell: '/bin/sh') {
                         sh '''#!/bin/sh
                         export PATH=/zap:$PATH
-                        /zap/zap-baseline.py -r index.html -t http://10.110.0.5:30680/WebGoat || return_code=$?
+                        /zap/zap-full-scan.py -r index.html -t http://10.110.0.5:30680/WebGoat || return_code=$?
                         echo "exit value was  - " $return_code
                         cp -r /zap/wrk ${WORKSPACE}/zap
                         '''
