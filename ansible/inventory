@@ -7,9 +7,13 @@
 [node2]
 178.128.140.201 
 
+[node3]
+161.35.247.252
+
 [cluster:children]
 node1
 node2
+node3
 
 [cluster:vars]
 ansible_ssh_user=root
