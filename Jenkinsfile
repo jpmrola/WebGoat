@@ -62,7 +62,7 @@ pipeline {
                     snykSecurity(
                     snykInstallation: 'snyk',
                     snykTokenId: 'snyk',
-                    additionalArguments: '--debug'
+                    additionalArguments: '--debug --all-projects'
                     )
                 }
             }
