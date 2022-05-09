@@ -79,7 +79,7 @@ pipeline {
                             sh """
                                 snyk auth ${SNYK_TOKEN}
                             snyk test --json \
-                                --debug
+                                --debug | snyk-to-html maven-results.html
                                 """
                         }
                     }
@@ -89,9 +89,9 @@ pipeline {
                         container('snyk-docker') {
                             sh """
                                 snyk auth ${SNYK_TOKEN}
-                            snyk test --json \
-                                --docker jrolaubi/webgoat-tese \
-                                --file=`pwd`/docker/Dockerfile
+                            snyk container test --json \
+                                jrolaubi/webgoat-tese \
+                                --file=`pwd`/docker/Dockerfile | snyk-to-html docker-results.html
                                 """
                         }
                     }
