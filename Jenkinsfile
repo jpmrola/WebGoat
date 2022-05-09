@@ -4,7 +4,7 @@ pipeline {
     }
     agent {
         kubernetes {
-            inheritFrom 'kubeagent-webgoat'
+            label 'kubeagent-webgoat'
         }
     }
     tools {
