@@ -75,24 +75,28 @@ pipeline {
             parallel {
                 stage('dependency scan') {
                     steps {
-                        container('snyk-maven') {
-                            sh """
-                                snyk auth ${SNYK_TOKEN}
-                            snyk test --json \
-                                --debug | snyk-to-html -o maven-results.html
-                                """
+                        catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                            container('snyk-maven') {
+                                sh """
+                                    snyk auth ${SNYK_TOKEN}
+                                    snyk test --json \
+                                    --debug | snyk-to-html -o maven-results.html
+                                    """
+                            }
                         }
                     }
                 }
                 stage('Snyk Docker scan') {
                     steps {
                         container('snyk-docker') {
-                            sh """
-                                snyk auth ${SNYK_TOKEN}
-                            snyk container test --json \
-                                jrolaubi/webgoat-tese \
-                                --file=`pwd`/docker/Dockerfile | snyk-to-html -o docker-results.html
-                                """
+                            catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                                sh """
+                                    snyk auth ${SNYK_TOKEN}
+                                    snyk container test --json \
+                                    jrolaubi/webgoat-tese \
+                                    --file=`pwd`/docker/Dockerfile | snyk-to-html -o docker-results.html
+                                    """
+                            }
                         }
                     }
                 }
