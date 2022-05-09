@@ -70,7 +70,7 @@ pipeline {
         stage('Snyk Maven Scan') {
             failFast true
                 environment {
-                    SNYK_TOKEN = credentials('snyk')
+                    SNYK_TOKEN = credentials('snyk-api')
                 }	
             parallel {
                 stage('dependency scan') {
@@ -90,7 +90,7 @@ pipeline {
                             sh """
                                 snyk auth ${SNYK_TOKEN}
                             snyk test --json \
-                                --docker jrolaubi/WebGoat:latest \
+                                --docker jrolaubi/webgoat-tese \
                                 --file=`pwd`/docker/Dockerfile
                                 """
                         }
