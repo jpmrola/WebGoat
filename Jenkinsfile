@@ -9,7 +9,7 @@ pipeline {
     }
     tools {
         maven 'maven'
-        jdk 'openjdk17'
+        jdk 'jdk17'
     }
     stages {
         stage('Clone repo') { 
@@ -90,7 +90,7 @@ pipeline {
                             sh """
                                 snyk auth ${SNYK_TOKEN}
                             snyk test --json \
-                                --docker WebGoat:latest \
+                                --docker jrolaubi/WebGoat:latest \
                                 --file=`pwd`/docker/Dockerfile
                                 """
                         }
