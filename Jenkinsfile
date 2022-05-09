@@ -79,7 +79,7 @@ pipeline {
                             sh """
                                 snyk auth ${SNYK_TOKEN}
                             snyk test --json \
-                                --debug | snyk-to-html maven-results.html
+                                --debug | snyk-to-html -o maven-results.html
                                 """
                         }
                     }
@@ -91,7 +91,7 @@ pipeline {
                                 snyk auth ${SNYK_TOKEN}
                             snyk container test --json \
                                 jrolaubi/webgoat-tese \
-                                --file=`pwd`/docker/Dockerfile | snyk-to-html docker-results.html
+                                --file=`pwd`/docker/Dockerfile | snyk-to-html -o docker-results.html
                                 """
                         }
                     }
@@ -130,6 +130,22 @@ pipeline {
                 reportDir: './zap',
                 reportFiles: 'index.html',
                 reportName: 'OWASP Zed Attack Proxy'
+            ]
+            publishHTML target: [
+                allowMissing: false,
+                alwaysLinkToLastBuild: false,
+                keepAll: true,
+                reportDir: '${WORKSPACE}',
+                reportFiles: 'docker-results.html',
+                reportName: 'Snyk Docker results'
+            ]
+            publishHTML target: [
+                allowMissing: false,
+                alwaysLinkToLastBuild: false,
+                keepAll: true,
+                reportDir: '${WORKSPACE}',
+                reportFiles: 'maven-results.html',
+                reportName: 'Snyk Maven results'
             ]
         }
     }
