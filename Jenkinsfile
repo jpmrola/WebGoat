@@ -139,7 +139,7 @@ pipeline {
                 allowMissing: false,
                 alwaysLinkToLastBuild: false,
                 keepAll: true,
-                reportDir: '${WORKSPACE}',
+                reportDir: './',
                 reportFiles: 'docker-results.html',
                 reportName: 'Snyk Docker results'
             ]
@@ -147,7 +147,7 @@ pipeline {
                 allowMissing: false,
                 alwaysLinkToLastBuild: false,
                 keepAll: true,
-                reportDir: '${WORKSPACE}',
+                reportDir: './',
                 reportFiles: 'maven-results.html',
                 reportName: 'Snyk Maven results'
             ]
