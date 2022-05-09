@@ -56,14 +56,45 @@ pipeline {
                 }
             }
         }
-        stage('Snyk analysis') {
-            steps {
-                catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                    snykSecurity(
-                    snykInstallation: 'snyk',
-                    snykTokenId: 'snyk',
-                    additionalArguments: '--debug --all-projects'
-                    )
+//        stage('Snyk analysis') {
+//            steps {
+//                catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+//                    snykSecurity(
+//                    snykInstallation: 'snyk',
+//                    snykTokenId: 'snyk',
+//                    additionalArguments: '--debug --all-projects'
+//                    )
+//                }
+//            }
+//        }
+        stage('Snyk Maven Scan') {
+            failFast true
+                environment {
+                    SNYK_TOKEN = credentials('snyk')
+                }	
+            parallel {
+                stage('dependency scan') {
+                    steps {
+                        container('snyk-maven') {
+                            sh """
+                                snyk auth ${SNYK_TOKEN}
+                            snyk test --json \
+                                --debug
+                                """
+                        }
+                    }
+                }
+                stage('Snyk Docker scan') {
+                    steps {
+                        container('snyk-docker') {
+                            sh """
+                                snyk auth ${SNYK_TOKEN}
+                            snyk test --json \
+                                --docker WebGoat:latest \
+                                --file=`pwd`/docker/Dockerfile
+                                """
+                        }
+                    }
                 }
             }
         }
