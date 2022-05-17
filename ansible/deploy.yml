@@ -71,4 +71,4 @@
               targetPort: 8888
               nodePort: 30688
           type: LoadBalancer
-          loadBalancerIP: 10.110.0.5
+          loadBalancerIP: 192.168.128.54
