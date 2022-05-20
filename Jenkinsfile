@@ -95,9 +95,6 @@ pipeline {
                                     snyk container test --json \
                                     jrolaubi/webgoat-tese \
                                     --file=`pwd`/docker/Dockerfile | snyk-to-html -o docker-results.html
-                                    mkdir ${WORKSPACE}/snyk-reports
-                                    mv ${WORKSPACE}/maven-results.html ${WORKSPACE}/snyk-reports
-                                    mv ${WORKSPACE}/docker-results.html ${WORKSPACE}/snyk-reports
                                     """
                             }
                         }
@@ -121,6 +118,9 @@ pipeline {
                         /zap/zap-full-scan.py -r index.html -t http://192.168.128.54:30680/WebGoat || return_code=$?
                         echo "exit value was  - " $return_code
                         cp -r /zap/wrk ${WORKSPACE}/zap
+                        mkdir ${WORKSPACE}/snyk-reports
+                        mv ${WORKSPACE}/maven-results.html ${WORKSPACE}/snyk-reports
+                        mv ${WORKSPACE}/docker-results.html ${WORKSPACE}/snyk-reports
                         '''
                     }
                 }
