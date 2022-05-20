@@ -95,6 +95,9 @@ pipeline {
                                     snyk container test --json \
                                     jrolaubi/webgoat-tese \
                                     --file=`pwd`/docker/Dockerfile | snyk-to-html -o docker-results.html
+                                    mkdir ${WORKSPACE}/snyk-reports
+                                    mv ${WORKSPACE}/maven-results.html ${WORKSPACE}/snyk-reports
+                                    mv ${WORKSPACE}/docker-results.html ${WORKSPACE}/snyk-reports
                                     """
                             }
                         }
@@ -139,7 +142,7 @@ pipeline {
                 allowMissing: false,
                 alwaysLinkToLastBuild: false,
                 keepAll: true,
-//                reportDir: './',
+                reportDir: './snyk-reports',
                 reportFiles: 'docker-results.html',
                 reportName: 'Snyk Docker results'
             ]
@@ -147,7 +150,7 @@ pipeline {
                 allowMissing: false,
                 alwaysLinkToLastBuild: false,
                 keepAll: true,
-//                reportDir: './',
+                reportDir: './snyk-reports',
                 reportFiles: 'maven-results.html',
                 reportName: 'Snyk Maven results'
             ]
