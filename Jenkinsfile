@@ -73,7 +73,7 @@ pipeline {
                     SNYK_TOKEN = credentials('snyk-api')
                 }	
             parallel {
-                stage('dependency scan') {
+                stage('Snyk Open-Source scan') {
                     steps {
                         catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                             container('snyk-maven') {
@@ -81,6 +81,20 @@ pipeline {
                                     snyk auth ${SNYK_TOKEN}
                                     snyk test --json \
                                     --debug | snyk-to-html -o maven-results.html
+                                    """
+                            }
+                        }
+                    }
+                }
+                stage('Snyk Code scan') {
+                    steps {
+                        container('snyk-docker') {
+                            catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                                sh """
+                                    snyk auth ${SNYK_TOKEN}
+                                    snyk code test --json \
+                                    jrolaubi/webgoat-tese \
+                                    --debug | snyk-to-html -o code-results.html
                                     """
                             }
                         }
@@ -102,6 +116,17 @@ pipeline {
                 }
             }
         }
+        stage('Move Report Files') {
+            steps {
+                container('snyk-maven') {
+                    sh """
+                        mv ${WORKSPACE}/maven-results.html ${WORKSPACE}/snyk-reports
+                        mv ${WORKSPACE}/code-results.html ${WORKSPACE}/snyk-reports
+                        mv ${WORKSPACE}/docker-results.html ${WORKSPACE}/snyk-reports
+                        """
+                }
+            }
+        }
         stage('Ansible playbook') {
             steps {
                 ansiblePlaybook( 
@@ -118,10 +143,11 @@ pipeline {
                         /zap/zap-full-scan.py -r index.html -t http://192.168.128.54:30680/WebGoat || return_code=$?
                         echo "exit value was  - " $return_code
                         cp -r /zap/wrk ${WORKSPACE}/zap
-                        mkdir ${WORKSPACE}/snyk-reports
-                        mv ${WORKSPACE}/maven-results.html ${WORKSPACE}/snyk-reports
-                        mv ${WORKSPACE}/docker-results.html ${WORKSPACE}/snyk-reports
                         '''
+//                        mkdir ${WORKSPACE}/snyk-reports
+//                        mv ${WORKSPACE}/maven-results.html ${WORKSPACE}/snyk-reports
+//                        mv ${WORKSPACE}/code-results.html ${WORKSPACE}/snyk-reports
+//                        mv ${WORKSPACE}/docker-results.html ${WORKSPACE}/snyk-reports
                     }
                 }
             }
@@ -144,6 +170,14 @@ pipeline {
                 keepAll: true,
                 reportDir: './snyk-reports',
                 reportFiles: 'docker-results.html',
+                reportName: 'Snyk Docker results'
+            ]
+            publishHTML target: [
+                allowMissing: false,
+                alwaysLinkToLastBuild: false,
+                keepAll: true,
+                reportDir: './snyk-reports',
+                reportFiles: 'code-results.html',
                 reportName: 'Snyk Docker results'
             ]
             publishHTML target: [
