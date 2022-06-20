@@ -119,6 +119,7 @@ pipeline {
             steps {
                 container('snyk-maven') {
                     sh """
+                        mkdir ${WORKSPACE}/snyk-reports
                         mv ${WORKSPACE}/maven-results.html ${WORKSPACE}/snyk-reports
                         mv ${WORKSPACE}/code-results.html ${WORKSPACE}/snyk-reports
                         mv ${WORKSPACE}/docker-results.html ${WORKSPACE}/snyk-reports
