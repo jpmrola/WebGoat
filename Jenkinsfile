@@ -93,7 +93,6 @@ pipeline {
                                 sh """
                                     snyk auth ${SNYK_TOKEN}
                                     snyk code test --json \
-                                    jrolaubi/webgoat-tese \
                                     --debug | snyk-to-html -o code-results.html
                                     """
                             }
