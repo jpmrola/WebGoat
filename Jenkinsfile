@@ -178,7 +178,7 @@ pipeline {
                 keepAll: true,
                 reportDir: './snyk-reports',
                 reportFiles: 'code-results.html',
-                reportName: 'Snyk Docker results'
+                reportName: 'Snyk Code results'
             ]
             publishHTML target: [
                 allowMissing: false,
