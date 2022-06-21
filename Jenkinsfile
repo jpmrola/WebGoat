@@ -140,7 +140,7 @@ pipeline {
                     container(name: 'zap', shell: '/bin/sh') {
                         sh '''#!/bin/sh
                         export PATH=/zap:$PATH
-                        /zap/zap-full-scan.py -r index.html -t http://192.168.128.54:30680/WebGoat || return_code=$?
+                        /zap/zap-full-scan.py -r index.html -t http://192.168.128.54:30680/WebGoat/login || return_code=$?
                         echo "exit value was  - " $return_code
                         cp -r /zap/wrk ${WORKSPACE}/zap
                         '''
