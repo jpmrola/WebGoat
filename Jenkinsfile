@@ -12,6 +12,7 @@ pipeline {
         jdk 'jdk17'
     }
     environment {
+        SERVER_ADDR = '192.168.128.54'
         SCAN_URL_YAML = 'http://192.168.128.54:30680/WebGoat'
         SCAN_URL_PYTHON = 'http://192.168.128.54:30680/WebGoat/login'
     }
@@ -24,6 +25,7 @@ pipeline {
         stage('Build project') { 
             steps {
                 // sh '${WORKSPACE}/mvnw clean install -DskipTests'
+                sh '''sed -i "s,0.0.0.0,${SERVER_ADDR}," ${WORKSPACE}/docker/start.sh'''
                 sh 'mvn clean install -DskipTests'
             }
         }
@@ -151,7 +153,7 @@ pipeline {
                         mv ${WORKSPACE}/zap/zap.yml /zap/zap.yml
                         mv ${WORKSPACE}/zap/createAccount.py /zap/createAccount.py
                         sed -i "s,REPLACE,${SCAN_URL_YAML}," /zap/zap.yml
-                        python3 /zap/createAccount.py ${SCAN_URL_YAML} ${WEBGOAT_CREDENTIALS_USR} ${WEBGOAT_CREDENTIALS_PSW}
+                        python3 /zap/createAccount.py ${SCAN_URL_YAML}/register.mvc ${WEBGOAT_CREDENTIALS_USR} ${WEBGOAT_CREDENTIALS_PSW}
                         /zap/zap.sh -cmd -autorun zap.yml
                         cp -r /zap/wrk ${WORKSPACE}/zap-report
 //                        /zap/zap-full-scan.py -r index.html -t ${SCAN_URL_PYTHON} || return_code=$?
