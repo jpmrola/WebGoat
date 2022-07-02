@@ -150,7 +150,7 @@ pipeline {
                         mkdir /zap/wrk
                         mv ${WORKSPACE}/zap/zap.yml /zap/zap.yml
                         mv ${WORKSPACE}/zap/createAccount.py /zap/createAccount.py
-                        sed -i "s/REPLACE/${SCAN_URL_YAML}/" /zap/zap.yml
+                        sed -i "s,REPLACE,${SCAN_URL_YAML}," /zap/zap.yml
                         python3 /zap/createAccount.py ${SCAN_URL_YAML} ${WEBGOAT_CREDENTIALS_USR} ${WEBGOAT_CREDENTIALS_PSW}
                         /zap/zap.sh -cmd -autorun zap.yml
                         cp -r /zap/wrk ${WORKSPACE}/zap-report
