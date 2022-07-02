@@ -1,0 +1,122 @@
+---
+env:
+  contexts:
+  - name: "WebGoat"
+    urls:
+    - "http://REPLACE:8080/WebGoat"
+    includePaths:
+    - "http://REPLACE:8080/WebGoat.*"
+    excludePaths: []
+    authentication:
+      method: "form"
+      parameters:
+        loginPageUrl: "http://REPLACE:8080/WebGoat/login"
+        loginRequestUrl: "http://REPLACE:8080/WebGoat/login"
+        loginRequestBody: "username={%username%}&password={%password%}"
+      verification:
+        method: "response"
+        loggedInRegex: "logout"
+        loggedOutRegex: "login"
+        pollFrequency: 60
+        pollUnits: "requests"
+        pollUrl: ""
+        pollPostData: ""
+    sessionManagement:
+      method: "cookie"
+      parameters: {}
+    users:
+    - name: "testing"
+      credentials:
+        password: "testing"
+        username: "testing"
+  parameters:
+    failOnError: true
+    failOnWarning: false
+    progressToStdout: true
+  vars: {}
+jobs:
+- parameters:
+    updateAddOns: false
+  install: []
+  uninstall: []
+  name: "addOns"
+  type: "addOns"
+- parameters:
+    scanOnlyInScope: true
+    enableTags: false
+  rules: []
+  name: "passiveScan-config"
+  type: "passiveScan-config"
+- parameters:
+    context: "WebGoat"
+    user: "testing"
+    url: ""
+    maxDuration: 0
+    maxDepth: 0
+    maxChildren: 0
+  tests:
+  - onFail: "INFO"
+    statistic: "stats.auth.success"
+    site: "http://REPLACE:8080"
+    operator: ">="
+    value: 1
+    type: "stats"
+    name: "at least 1 auth success"
+  name: "spider"
+  type: "spider"
+- parameters:
+    context: "WebGoat"
+    user: "testing"
+    url: "http://REPLACE:8080/WebGoat/welcome.mvc"
+    maxDuration: 0
+    maxCrawlDepth: 0
+    numberOfBrowsers: 1
+  tests:
+  - onFail: "INFO"
+    statistic: "stats.auth.success"
+    site: "http://REPLACE:8080"
+    operator: ">="
+    value: 1
+    type: "stats"
+    name: "at least 1 auth success"
+  name: "spiderAjax"
+  type: "spiderAjax"
+- parameters: {}
+  name: "passiveScan-wait"
+  type: "passiveScan-wait"
+- parameters:
+    context: "WebGoat"
+    user: "testing"
+    policy: ""
+    maxRuleDurationInMins: 0
+    maxScanDurationInMins: 0
+  policyDefinition:
+    defaultStrength: "medium"
+    defaultThreshold: "off"
+    rules: []
+  name: "activeScan"
+  type: "activeScan"
+- parameters:
+    template: "traditional-html"
+    reportDir: "/zap/wrk"
+    reportFile: "index.html"
+    reportTitle: "ZAP Scanning Report"
+    reportDescription: ""
+    displayReport: false
+  risks:
+  - "info"
+  - "low"
+  - "medium"
+  - "high"
+  confidences:
+  - "falsepositive"
+  - "low"
+  - "medium"
+  - "high"
+  - "confirmed"
+  sections:
+  - "instancecount"
+  - "alertdetails"
+  - "alertcount"
+  name: "report"
+  type: "report"

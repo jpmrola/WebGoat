@@ -11,6 +11,10 @@ pipeline {
         maven 'maven'
         jdk 'jdk17'
     }
+    environment {
+        SCAN_URL_YAML = 'http://192.168.128.54:30680/WebGoat'
+        SCAN_URL_PYTHON = 'http://192.168.128.54:30680/WebGoat/login'
+    }
     stages {
         stage('Clone repo') { 
             steps {
@@ -135,19 +139,24 @@ pipeline {
             }
         }
         stage('ZAP scan') {
+            environment {
+                WEBGOAT_CREDENTIALS = credentials('webgoat')
+            }
             steps {
                 script {
                     container(name: 'zap', shell: '/bin/sh') {
                         sh '''#!/bin/sh
                         export PATH=/zap:$PATH
-                        /zap/zap-full-scan.py -r index.html -t http://192.168.128.54:30680/WebGoat/login || return_code=$?
-                        echo "exit value was  - " $return_code
-                        cp -r /zap/wrk ${WORKSPACE}/zap
+                        mkdir /zap/wrk
+                        mv ${WORKSPACE}/zap/zap.yml /zap/zap.yml
+                        mv ${WORKSPACE}/zap/createAccount.py /zap/createAccount.py
+                        sed -i "s/REPLACE/${SCAN_URL_YAML}/" /zap/zap.yml
+                        python3 /zap/createAccount.py ${SCAN_URL_YAML} ${WEBGOAT_CREDENTIALS_USR} ${WEBGOAT_CREDENTIALS_PSW}
+                        /zap/zap.sh -cmd -autorun zap.yml
+                        cp -r /zap/wrk ${WORKSPACE}/zap-report
+//                        /zap/zap-full-scan.py -r index.html -t ${SCAN_URL_PYTHON} || return_code=$?
+//                        echo "exit value was  - " $return_code
                         '''
-//                        mkdir ${WORKSPACE}/snyk-reports
-//                        mv ${WORKSPACE}/maven-results.html ${WORKSPACE}/snyk-reports
-//                        mv ${WORKSPACE}/code-results.html ${WORKSPACE}/snyk-reports
-//                        mv ${WORKSPACE}/docker-results.html ${WORKSPACE}/snyk-reports
                     }
                 }
             }
@@ -160,7 +169,7 @@ pipeline {
                 allowMissing: false,
                 alwaysLinkToLastBuild: false,
                 keepAll: true,
-                reportDir: './zap',
+                reportDir: './zap-report',
                 reportFiles: 'index.html',
                 reportName: 'OWASP Zed Attack Proxy'
             ]
