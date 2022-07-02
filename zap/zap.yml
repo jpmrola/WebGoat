@@ -3,15 +3,15 @@ env:
   contexts:
   - name: "WebGoat"
     urls:
-    - "http://REPLACE:8080/WebGoat"
+    - "REPLACE"
     includePaths:
-    - "http://REPLACE:8080/WebGoat.*"
+    - "REPLACE.*"
     excludePaths: []
     authentication:
       method: "form"
       parameters:
-        loginPageUrl: "http://REPLACE:8080/WebGoat/login"
-        loginRequestUrl: "http://REPLACE:8080/WebGoat/login"
+        loginPageUrl: "REPLACE/login"
+        loginRequestUrl: "REPLACE/login"
         loginRequestBody: "username={%username%}&password={%password%}"
       verification:
         method: "response"
@@ -67,7 +67,7 @@ jobs:
 - parameters:
     context: "WebGoat"
     user: "testing"
-    url: "http://REPLACE:8080/WebGoat/welcome.mvc"
+    url: "REPLACE/welcome.mvc"
     maxDuration: 0
     maxCrawlDepth: 0
     numberOfBrowsers: 1
