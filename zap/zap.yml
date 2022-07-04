@@ -257,7 +257,7 @@ jobs:
 - parameters:
     context: "WebGoat"
     user: "testing"
-    policy: ""
+    policy: "Default Policy"
     maxRuleDurationInMins: 0
     maxScanDurationInMins: 0
   policyDefinition:
