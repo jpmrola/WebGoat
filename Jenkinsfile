@@ -25,7 +25,8 @@ pipeline {
         stage('Build project') { 
             steps {
                 // sh '${WORKSPACE}/mvnw clean install -DskipTests'
-                sh '''sed -i "s,0.0.0.0,${SERVER_ADDR}," ${WORKSPACE}/docker/start.sh'''
+                sh '''sed -i "s/0.0.0.0/${SERVER_ADDR}/" ${WORKSPACE}/docker/start.sh'''
+                sh '''cat ${WORKSPACE}/docker/start.sh'''
                 sh 'mvn clean install -DskipTests'
             }
         }
@@ -155,10 +156,12 @@ pipeline {
                         sed -i "s,REPLACE,${SCAN_URL_YAML}," /zap/zap.yml
                         python3 /zap/createAccount.py ${SCAN_URL_YAML}/register.mvc ${WEBGOAT_CREDENTIALS_USR} ${WEBGOAT_CREDENTIALS_PSW}
                         /zap/zap.sh -cmd -autorun zap.yml
-//                        cp -r /zap/wrk ${WORKSPACE}/zap-report
+                        cp -r /zap/wrk ${WORKSPACE}/zap-report
+                        '''
+//                        chmod +x -R ${env.WORKSPACE}
 //                        /zap/zap-full-scan.py -r index.html -t ${SCAN_URL_PYTHON} || return_code=$?
 //                        echo "exit value was  - " $return_code
-                        '''
+
                     }
                 }
             }
@@ -171,7 +174,7 @@ pipeline {
                 allowMissing: false,
                 alwaysLinkToLastBuild: false,
                 keepAll: true,
-                reportDir: '/zap/wrk/',
+                reportDir: './zap-report',
                 reportFiles: 'index.html',
                 reportName: 'OWASP Zed Attack Proxy'
             ]
