@@ -146,6 +146,9 @@ pipeline {
                 WEBGOAT_CREDENTIALS = credentials('webgoat')
             }
             steps {
+                waitUntil {
+                    sh 'wget --retry-connrefused --tries=30 --waitretry=1 -q ${SCAN_URL_YAML}/registration -O /dev/null'
+                }
                 script {
                     container(name: 'zap', shell: '/bin/sh') {
                         sh '''#!/bin/sh
