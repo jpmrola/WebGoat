@@ -13,6 +13,7 @@ pipeline {
     }
     environment {
         SERVER_ADDR = '192.168.128.54'
+        SCAN_URL_SITE = 'http://192.168.128.54:30680'
         SCAN_URL_YAML = 'http://192.168.128.54:30680/WebGoat'
         SCAN_URL_PYTHON = 'http://192.168.128.54:30680/WebGoat/login'
     }
@@ -167,6 +168,7 @@ pipeline {
                         mv ${WORKSPACE}/zap/zap.yml /zap/zap.yml
                         mv ${WORKSPACE}/zap/createAccount.py /zap/createAccount.py
                         sed -i "s,REPLACE,${SCAN_URL_YAML}," /zap/zap.yml
+                        sed -i "s,REPLACE_SITE,${SCAN_URL_SITE}," /zap/zap.yml
                         python3 /zap/createAccount.py ${SCAN_URL_YAML}/register.mvc ${WEBGOAT_CREDENTIALS_USR} ${WEBGOAT_CREDENTIALS_PSW}
                         /zap/zap.sh -cmd -autorun zap.yml
                         cp -r /zap/wrk ${WORKSPACE}/zap-report
