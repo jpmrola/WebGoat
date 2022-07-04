@@ -48,6 +48,176 @@ jobs:
   name: "passiveScan-config"
   type: "passiveScan-config"
 - parameters:
+    user: "testing"
+  requests:
+  - url: "http://REPLACE/HttpBasics.lesson.lesson"
+    name: ""
+    method: "GET"
+    data: ""
+    responseCode: 302
+  - url: "http://REPLACE/HttpProxies.lesson"
+    name: ""
+    method: "GET"
+    data: ""
+    responseCode: 302
+  - url: "http://REPLACE/ChromeDevTools.lesson"
+    name: ""
+    method: "GET"
+    data: ""
+    responseCode: 302
+  - url: "http://REPLACE/CIA.lesson"
+    name: ""
+    method: "GET"
+    data: ""
+    responseCode: 302
+  - url: "http://REPLACE/Crypto.lesson.lesson"
+    name: ""
+    method: "GET"
+    data: ""
+    responseCode: 302
+  - url: "http://REPLACE/LessonTemplate.lesson.lesson"
+    name: ""
+    method: "GET"
+    data: ""
+    responseCode: 302
+  - url: "http://REPLACE/SqlInjection.lesson.lesson"
+    name: ""
+    method: "GET"
+    data: ""
+    responseCode: 302
+  - url: "http://REPLACE/SqlInjectionAdvanced.lesson.lesson"
+    name: ""
+    method: "GET"
+    data: ""
+    responseCode: 302
+  - url: "http://REPLACE/SqlInjectionMitigations.lesson.lesson"
+    name: ""
+    method: "GET"
+    data: ""
+    responseCode: 302
+  - url: "http://REPLACE/PathTraversal.lesson.lesson"
+    name: ""
+    method: "GET"
+    data: ""
+    responseCode: 302
+  - url: "http://REPLACE/AuthBypass.lesson.lesson"
+    name: ""
+    method: "GET"
+    data: ""
+    responseCode: 302
+  - url: "http://REPLACE/JWT.lesson.lesson"
+    name: ""
+    method: "GET"
+    data: ""
+    responseCode: 302
+  - url: "http://REPLACE/PasswordReset.lesson.lesson"
+    name: ""
+    method: "GET"
+    data: ""
+    responseCode: 302
+  - url: "http://REPLACE/SecurePasswords.lesson.lesson"
+    name: ""
+    method: "GET"
+    data: ""
+    responseCode: 302
+  - url: "http://REPLACE/InsecureLogin.lesson.lesson"
+    name: ""
+    method: "GET"
+    data: ""
+    responseCode: 302
+  - url: "http://REPLACE/XXE.lesson.lesson"
+    name: ""
+    method: "GET"
+    data: ""
+    responseCode: 302
+  - url: "http://REPLACE/IDOR.lesson.lesson"
+    name: ""
+    method: "GET"
+    data: ""
+    responseCode: 302
+  - url: "http://REPLACE/MissingFunctionAC.lesson.lesson"
+    name: ""
+    method: "GET"
+    data: ""
+    responseCode: 302
+  - url: "http://REPLACE/CrossSiteScripting.lesson.lesson"
+    name: ""
+    method: "GET"
+    data: ""
+    responseCode: 302
+  - url: "http://REPLACE/InsecureDeserialization.lesson.lesson"
+    name: ""
+    method: "GET"
+    data: ""
+    responseCode: 302
+  - url: "http://REPLACE/VulnerableComponents.lesson.lesson"
+    name: ""
+    method: "GET"
+    data: ""
+    responseCode: 302
+  - url: "http://REPLACE/HijackSession.lesson.lesson"
+    name: ""
+    method: "GET"
+    data: ""
+    responseCode: 302
+  - url: "http://REPLACE/SpoofCookie.lesson.lesson"
+    name: ""
+    method: "GET"
+    data: ""
+    responseCode: 302
+  - url: "http://REPLACE/CSRF.lesson.lesson"
+    name: ""
+    method: "GET"
+    data: ""
+    responseCode: 302
+  - url: "http://REPLACE/SSRF.lesson.lesson"
+    name: ""
+    method: "GET"
+    data: ""
+    responseCode: 302
+  - url: "http://REPLACE/LogSpoofing.lesson.lesson"
+    name: ""
+    method: "GET"
+    data: ""
+    responseCode: 302
+  - url: "http://REPLACE/BypassRestrictions.lesson.lesson"
+    name: ""
+    method: "GET"
+    data: ""
+    responseCode: 302
+  - url: "http://REPLACE/ClientSideFiltering.lesson.lesson"
+    name: ""
+    method: "GET"
+    data: ""
+    responseCode: 302
+  - url: "http://REPLACE/HtmlTampering.lesson.lesson"
+    name: ""
+    method: "GET"
+    data: ""
+    responseCode: 302
+  - url: "http://REPLACE/Challenge1.lesson.lesson"
+    name: ""
+    method: "GET"
+    data: ""
+    responseCode: 302
+  - url: "http://REPLACE/Challenge5.lesson.lesson"
+    name: ""
+    method: "GET"
+    data: ""
+    responseCode: 302
+  - url: "http://REPLACE/Challenge7.lesson.lesson"
+    name: ""
+    method: "GET"
+    data: ""
+    responseCode: 302
+  - url: "http://REPLACE/Challenge8.lesson.lesson"
+    name: ""
+    method: "GET"
+    data: ""
+    responseCode: 302
+  name: "requestor"
+  type: "requestor"
+- parameters:
     context: "WebGoat"
     user: "testing"
     url: ""
