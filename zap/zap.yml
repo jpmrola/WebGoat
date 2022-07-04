@@ -54,167 +54,167 @@ jobs:
     name: ""
     method: "GET"
     data: ""
-    responseCode: 302
+    responseCode: 200
   - url: "REPLACE/HttpProxies.lesson"
     name: ""
     method: "GET"
     data: ""
-    responseCode: 302
+    responseCode: 200
   - url: "REPLACE/ChromeDevTools.lesson"
     name: ""
     method: "GET"
     data: ""
-    responseCode: 302
+    responseCode: 200
   - url: "REPLACE/CIA.lesson"
     name: ""
     method: "GET"
     data: ""
-    responseCode: 302
+    responseCode: 200
   - url: "REPLACE/Crypto.lesson.lesson"
     name: ""
     method: "GET"
     data: ""
-    responseCode: 302
+    responseCode: 200
   - url: "REPLACE/LessonTemplate.lesson.lesson"
     name: ""
     method: "GET"
     data: ""
-    responseCode: 302
+    responseCode: 200
   - url: "REPLACE/SqlInjection.lesson.lesson"
     name: ""
     method: "GET"
     data: ""
-    responseCode: 302
+    responseCode: 200
   - url: "REPLACE/SqlInjectionAdvanced.lesson.lesson"
     name: ""
     method: "GET"
     data: ""
-    responseCode: 302
+    responseCode: 200
   - url: "REPLACE/SqlInjectionMitigations.lesson.lesson"
     name: ""
     method: "GET"
     data: ""
-    responseCode: 302
+    responseCode: 200
   - url: "REPLACE/PathTraversal.lesson.lesson"
     name: ""
     method: "GET"
     data: ""
-    responseCode: 302
+    responseCode: 200
   - url: "REPLACE/AuthBypass.lesson.lesson"
     name: ""
     method: "GET"
     data: ""
-    responseCode: 302
+    responseCode: 200
   - url: "REPLACE/JWT.lesson.lesson"
     name: ""
     method: "GET"
     data: ""
-    responseCode: 302
+    responseCode: 200
   - url: "REPLACE/PasswordReset.lesson.lesson"
     name: ""
     method: "GET"
     data: ""
-    responseCode: 302
+    responseCode: 200
   - url: "REPLACE/SecurePasswords.lesson.lesson"
     name: ""
     method: "GET"
     data: ""
-    responseCode: 302
+    responseCode: 200
   - url: "REPLACE/InsecureLogin.lesson.lesson"
     name: ""
     method: "GET"
     data: ""
-    responseCode: 302
+    responseCode: 200
   - url: "REPLACE/XXE.lesson.lesson"
     name: ""
     method: "GET"
     data: ""
-    responseCode: 302
+    responseCode: 200
   - url: "REPLACE/IDOR.lesson.lesson"
     name: ""
     method: "GET"
     data: ""
-    responseCode: 302
+    responseCode: 200
   - url: "REPLACE/MissingFunctionAC.lesson.lesson"
     name: ""
     method: "GET"
     data: ""
-    responseCode: 302
+    responseCode: 200
   - url: "REPLACE/CrossSiteScripting.lesson.lesson"
     name: ""
     method: "GET"
     data: ""
-    responseCode: 302
+    responseCode: 200
   - url: "REPLACE/InsecureDeserialization.lesson.lesson"
     name: ""
     method: "GET"
     data: ""
-    responseCode: 302
+    responseCode: 200
   - url: "REPLACE/VulnerableComponents.lesson.lesson"
     name: ""
     method: "GET"
     data: ""
-    responseCode: 302
+    responseCode: 200
   - url: "REPLACE/HijackSession.lesson.lesson"
     name: ""
     method: "GET"
     data: ""
-    responseCode: 302
+    responseCode: 200
   - url: "REPLACE/SpoofCookie.lesson.lesson"
     name: ""
     method: "GET"
     data: ""
-    responseCode: 302
+    responseCode: 200
   - url: "REPLACE/CSRF.lesson.lesson"
     name: ""
     method: "GET"
     data: ""
-    responseCode: 302
+    responseCode: 200
   - url: "REPLACE/SSRF.lesson.lesson"
     name: ""
     method: "GET"
     data: ""
-    responseCode: 302
+    responseCode: 200
   - url: "REPLACE/LogSpoofing.lesson.lesson"
     name: ""
     method: "GET"
     data: ""
-    responseCode: 302
+    responseCode: 200
   - url: "REPLACE/BypassRestrictions.lesson.lesson"
     name: ""
     method: "GET"
     data: ""
-    responseCode: 302
+    responseCode: 200
   - url: "REPLACE/ClientSideFiltering.lesson.lesson"
     name: ""
     method: "GET"
     data: ""
-    responseCode: 302
+    responseCode: 200
   - url: "REPLACE/HtmlTampering.lesson.lesson"
     name: ""
     method: "GET"
     data: ""
-    responseCode: 302
+    responseCode: 200
   - url: "REPLACE/Challenge1.lesson.lesson"
     name: ""
     method: "GET"
     data: ""
-    responseCode: 302
+    responseCode: 200
   - url: "REPLACE/Challenge5.lesson.lesson"
     name: ""
     method: "GET"
     data: ""
-    responseCode: 302
+    responseCode: 200
   - url: "REPLACE/Challenge7.lesson.lesson"
     name: ""
     method: "GET"
     data: ""
-    responseCode: 302
+    responseCode: 200
   - url: "REPLACE/Challenge8.lesson.lesson"
     name: ""
     method: "GET"
     data: ""
-    responseCode: 302
+    responseCode: 200
   name: "requestor"
   type: "requestor"
 - parameters:
