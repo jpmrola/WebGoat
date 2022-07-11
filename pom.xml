@@ -135,6 +135,8 @@
         <thymeleaf.version>3.0.14.RELEASE</thymeleaf.version>
         <pmd.version>3.15.0</pmd.version>
         <checkstyle.version>3.1.2</checkstyle.version>
+        <sonar.dependencyCheck.jsonReportPath>target/dependency-check-report.json</sonar.dependencyCheck.jsonReportPath>
+        <sonar.dependencyCheck.htmlReportPath>target/dependency-check-report.html</sonar.dependencyCheck.htmlReportPath>
     </properties>
 
     <modules>
