@@ -87,7 +87,7 @@ pipeline {
                             container('snyk-maven') {
                                 sh '''
                                     snyk auth ${SNYK_TOKEN}
-                                    snyk test --json --json-file-output maven-results.json \
+                                    snyk test --json --json-file-output=maven-results.json \
                                     --debug 
                                     snyk-to-html -i maven-results.json -o maven-results.html
                                     '''
@@ -101,7 +101,7 @@ pipeline {
                             catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                                 sh '''
                                     snyk auth ${SNYK_TOKEN}
-                                    snyk code test --json --json-file-output code-results.json \
+                                    snyk code test --json --json-file-output=code-results.json \
                                     --debug 
                                     snyk-to-html -i code-results.json -o code-results.html
                                     '''
@@ -115,7 +115,7 @@ pipeline {
                             catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                                 sh '''
                                     snyk auth ${SNYK_TOKEN}
-                                    snyk container test --json --json-file-output docker-results.json \
+                                    snyk container test --json --json-file-output=docker-results.json \
                                     jrolaubi/webgoat-tese \
                                     --file=`pwd`/docker/Dockerfile  
                                     snyk-to-html -i docker-results.json -o docker-results.html
@@ -131,9 +131,9 @@ pipeline {
                 container('snyk-maven') {
                     sh '''
                         mkdir ${WORKSPACE}/snyk-reports
-                        mv ${WORKSPACE}/maven-results.html ${WORKSPACE}/snyk-reports
-                        mv ${WORKSPACE}/code-results.html ${WORKSPACE}/snyk-reports
-                        mv ${WORKSPACE}/docker-results.html ${WORKSPACE}/snyk-reports
+                        mv ${WORKSPACE}/maven-results.* ${WORKSPACE}/snyk-reports
+                        mv ${WORKSPACE}/code-results.* ${WORKSPACE}/snyk-reports
+                        mv ${WORKSPACE}/docker-results.* ${WORKSPACE}/snyk-reports
                         '''
                 }
             }
