@@ -88,8 +88,7 @@ pipeline {
                                 sh '''
                                     snyk auth ${SNYK_TOKEN}
                                     snyk test --json --json-file-output=maven-results.json \
-                                    --debug 
-                                    snyk-to-html -i maven-results.json -o maven-results.html
+                                    --debug | snyk-to-html -o maven-results.html
                                     '''
                             }
                         }
@@ -102,8 +101,7 @@ pipeline {
                                 sh '''
                                     snyk auth ${SNYK_TOKEN}
                                     snyk code test --json --json-file-output=code-results.json \
-                                    --debug 
-                                    snyk-to-html -i code-results.json -o code-results.html
+                                    --debug | snyk-to-html -o code-results.html
                                     '''
                             }
                         }
@@ -117,8 +115,7 @@ pipeline {
                                     snyk auth ${SNYK_TOKEN}
                                     snyk container test --json --json-file-output=docker-results.json \
                                     jrolaubi/webgoat-tese \
-                                    --file=`pwd`/docker/Dockerfile  
-                                    snyk-to-html -i docker-results.json -o docker-results.html
+                                    --file=`pwd`/docker/Dockerfile | snyk-to-html -o docker-results.html
                                     '''
                             }
                         }
