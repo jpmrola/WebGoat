@@ -1,6 +1,7 @@
 pipeline {
     triggers{
         githubPush()
+        cron('''0 */3 * * *''')
     }
     agent {
         kubernetes {
