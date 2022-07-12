@@ -90,7 +90,7 @@ pipeline {
                                 sh '''
                                     snyk auth ${SNYK_TOKEN}
                                     snyk test --json --json-file-output=maven-results.json \
-                                    --debug | snyk-to-html -o maven-results.html
+                                    --debug --all-projects | snyk-to-html -o maven-results.html
                                     '''
                             }
                         }
