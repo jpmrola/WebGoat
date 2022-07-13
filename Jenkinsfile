@@ -39,6 +39,9 @@ pipeline {
                     withSonarQubeEnv('sonarqube-webgoat') { // If you have configured more than one global server connection, you can specify its name
                         sh '''
                         mvn org.owasp:dependency-check-maven:7.0.4:aggregate -Dformats=JSON,HTML
+                        mkdir ${WORKSPACE}/dependency-check-reports
+                        cp ${WORKSPACE}/target/dependency-check-report.json ${WORKSPACE}/dependency-check-reports/
+                        cp ${WORKSPACE}/target/dependency-check-report.html ${WORKSPACE}/dependency-check-reports/
                         mvn sonar:sonar \
                         -Dsonar.projectKey=webgoat\
                         -Dsonar.host.url=${SONAR_HOST_URL}\
@@ -195,6 +198,14 @@ pipeline {
                 reportDir: './zap-report',
                 reportFiles: 'index.html',
                 reportName: 'OWASP Zed Attack Proxy'
+            ]
+            publishHTML target: [
+                allowMissing: false,
+                alwaysLinkToLastBuild: false,
+                keepAll: true,
+                reportDir: './dependency-check-reports',
+                reportFiles: 'dependency-check-report.html',
+                reportName: 'dependency-check report'
             ]
             publishHTML target: [
                 allowMissing: false,
