@@ -38,7 +38,7 @@ pipeline {
                     def scannerHome = tool 'sonarscanner';
                     withSonarQubeEnv('sonarqube-webgoat') { // If you have configured more than one global server connection, you can specify its name
                         sh '''
-                        mvn org.owasp:dependency-check-maven:7.0.4:aggregate -Dformats=JSON,HTML
+                        mvn org.owasp:dependency-check-maven:7.1.1:aggregate -Dformats=JSON,HTML
                         mkdir ${WORKSPACE}/dependency-check-reports
                         cp ${WORKSPACE}/target/dependency-check-report.json ${WORKSPACE}/dependency-check-reports/
                         cp ${WORKSPACE}/target/dependency-check-report.html ${WORKSPACE}/dependency-check-reports/
