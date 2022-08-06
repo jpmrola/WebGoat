@@ -81,7 +81,7 @@ pipeline {
 //                }
 //            }
 //        }
-        stage('Snyk Maven Scan') {
+        stage('Snyk Scan') {
             failFast true
                 environment {
                     SNYK_TOKEN = credentials('snyk-api')
@@ -102,7 +102,7 @@ pipeline {
                 }
                 stage('Snyk Code scan') {
                     steps {
-                        container('snyk-docker') {
+                        container('snyk-code') {
                             catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                                 sh '''
                                     snyk auth ${SNYK_TOKEN}
